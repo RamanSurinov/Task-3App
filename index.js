@@ -7,7 +7,7 @@ const express = require('express'),
 
 require('dotenv').config();
 
-const host = process.env.HOST || '127.0.0.1';
+
 const port = process.env.PORT || 3005;
 
 Sentry.init({
@@ -23,6 +23,6 @@ app.use(Sentry.Handlers.errorHandler());
 app.use('/api', routes);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.listen(port, host, () =>
+app.listen(port, () =>
     console.log(`Server listens http://${host}:${port}`)
 );
