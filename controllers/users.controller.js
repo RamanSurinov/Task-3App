@@ -1,8 +1,15 @@
-const UsersService = require('../services/users.service');
+const UsersService = require('../services/users.service'),
+    { validationResult } = require('express-validator')
+
 
 class UsersController {
+
     getUsers(req, res) {
-        if (req.query.id) {
+
+        const validationErrors = validationResult(req)
+        console.log(validationErrors)
+
+        if (req.query.id && validationErrors.isEmpty()) {
             if (req.users.hasOwnProperty(req.query.id))
                 return res.status(200).send({
                     data: req.users[req.query.id],
@@ -20,7 +27,11 @@ class UsersController {
     }
 
     async createUser(req, res) {
-        if (req.body.user && req.body.user.id) {
+
+        const validationErrors = validationResult(req)
+        console.log(validationErrors)
+
+        if (req.body.user && req.body.user.id && validationErrors.isEmpty()) {
             if (req.users.hasOwnProperty(req.body.user.id))
                 return res.status(409).send({
                     message: 'User already exists.',
@@ -44,7 +55,11 @@ class UsersController {
     }
 
     async updateUser(req, res) {
-        if (req.body.user && req.body.user.id) {
+
+        const validationErrors = validationResult(req)
+        console.log(validationErrors)
+
+        if (req.body.user && req.body.user.id && validationErrors.isEmpty()) {
             if (!req.users.hasOwnProperty(req.body.user.id))
                 return res
                     .status(404)
@@ -68,7 +83,11 @@ class UsersController {
     }
 
     async deleteUser(req, res) {
-        if (req.query.id) {
+
+        const validationErrors = validationResult(req)
+        console.log(validationErrors)
+
+        if (req.query.id && validationErrors.isEmpty()) {
             if (req.users.hasOwnProperty(req.query.id)) {
                 delete req.users[req.query.id];
 
