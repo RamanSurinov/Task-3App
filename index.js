@@ -24,5 +24,5 @@ app.use('/api', routes);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.listen(port, () =>
-    console.log(`Server listens http://${host}:${port}`)
+    console.log(`Server listens ${port}`)
 );
